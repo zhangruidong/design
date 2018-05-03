@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zzzrd</title>
+</head>
+<body>
+    <script>
+        /*工厂函数
+        *
+        * 工厂模式虽然解决了创建多个对象的问题  但却没有解决对象识别的问题
+        *
+        *
+        * 构造函数模式
+        *   new  操作符调用构造函数  经历的四个步骤
+        *       1. 创建一个新对象
+        *       2. 将构造函数的作用域赋给新对象（因此this就指向了这个新对象）
+        *       3. 执行构造函数中的代码（为这个新对象添加属性）
+        *       4. 返回新对象
+        *
+    *       创建自定义的构造函数意味着将来可以将它的实例标识为一种特定的类型；而这正是构造函数模式胜过工厂模式的地方
+    *
+    *       问题：每个方法多要在每个实例上重新创建一遍。（从这个角度来看，每个实例都包含一个不同的Function实例）
+    *
+    *       解决：通过把函数定义转移到构造函数外部来解决这个问题
+    *
+    *       问题：函数放到全局污染全局，没有封装性可言
+    *
+    *       解决：原型模式
+    *
+*       原型模式：
+*           创建一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象
+*           所有原型对象都会自动获得一个constructor（构造函数）属性，这个属性是一个指向prototype属性所在函数的指针
+*               Person.prototype.constructor === Person
+*           每当代码读取某个对象的某个属性时，都会执行一次搜索，目标是具有给定名字的属性。搜索首先从对象实例本身开始。如果在实例中找到了具有给定名字的属性，则返回该属性的值；如果没找到，则继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。如果在原型对象中找到了这个属性，则返回该属性的值
+*           
+*           obj.hasOwnProperty() 可以检测一个属性是存在于实例中，还是存在于原型中
+*
+*           实例中的指针指向原型，而不是构造函数
+    *
+        *
+        * */
+
+
+        // function Person(name,age,job) {
+        //   this.name = name
+        //   this.age = age
+        //   this.satName = function() {
+        //     alert(this.name)
+        //   }
+        // }
+        // var person1 = new Person('zrd',18,'code')
+        // var person2 = new Person('lb',33,'CEO')
+        // var person3 = {name:'lb',age:22,job:'hahah'}
+        // console.log(person1)
+        // console.log(person2)
+
+        function Person() {
+
+        }
+        Person.prototype.name = "zzz"
+        Person.prototype.age = 18
+        Person.prototype.job = "code"
+        Person.prototype.sayName = function() {
+          console.log(this.name)
+        }
+
+        var person1 = new Person()
+        person1.name = 'zrd'
+        person1.sayName()
+        for( p in person1){
+          console.log(p)
+          if(p === 'name'){
+            console.log(person1.hasOwnProperty(p))
+          }
+        }
+
+    </script>
+</body>
+</html>

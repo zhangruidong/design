@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zzzrd</title>
+</head>
+<body>
+
+</body>
+<script>
+    var book = {aaa:'zzz'}
+
+    Object.defineProperties(book,{
+    _year: {
+      value: 2004,
+      enumerable: true
+    },
+    edition: {
+      value: 1
+    },
+    year: {
+      get: function() {
+        console.log('zrd')
+        return this._year
+      },
+      set: function(newValue) {
+        if(newValue>2004){
+          this._year = newValue
+          this.edition += newValue -2004
+        }
+      }
+    }
+    })
+
+    // console.log(book)
+    // console.log(book.edition)
+    // console.log(book._year)
+    console.log(Object.keys(book))
+    console.log(Object.getOwnPropertyNames(book))
+    // console.log(Object.getOwnPropertyDescriptor(book,"name"))
+
+</script>
+</html>
