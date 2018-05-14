@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /** 2018/5/11
+         *author: zrd
+         *功能: 多态
+         *  同一对象作用于不同的对象上面，可以产生不同的解释和不同的结果。
+        */
+
+
+        var makeSound = function (animal) {
+            animal.sound()
+        }
+
+        function Duck() {
+
+        }
+        Duck.prototype.sound = function () {
+            console.log("嘎嘎嘎")
+        }
+
+
+        function Chicken() {
+
+        }
+        Chicken.prototype.sound = function () {
+            console.log("咯咯咯")
+        }
+
+        function Dog() {
+
+        }
+        Dog.prototype.sound = function() {
+            console.log("汪汪汪")
+        }
+
+        makeSound(new Duck())
+        makeSound(new Chicken())
+        makeSound(new Dog())
+    </script>
+</body>
+</html>
