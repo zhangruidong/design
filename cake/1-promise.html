@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* let p = new Promise((resolve,reject) => {
+            // 做一些移步操作
+            setTimeout(() => {
+                console.log('====================================');
+                console.log("执行完成");
+                console.log('====================================');
+                resolve("成功的回调")
+            }, 5000);
+        })
+        p.then((data)=> {
+            console.log('====================================');
+            console.log(data);
+            console.log('====================================');
+        }) */
+
+        /* let p = new Promise((resolve,reject) => {
+            setTimeout(() => {
+                var random = Math.random()*10
+                console.log('====================================');
+                console.log(random);
+                console.log('====================================');
+                if(random<5){
+                    reject("fail")
+                }else {
+                    resolve("success")
+                }
+            }, 2000);
+        })
+
+        p.then((data) => {
+            console.log('====================================');
+            console.log(data);
+            console.log('====================================');
+        }).catch((err) => {
+            console.log('====================================');
+            console.log(err);
+            console.log('====================================');
+        }) */
+
+        /* 
+        all的用法：
+            谁跑的慢，以谁为准 执行会调
+        reac的用法：
+            谁跑的快，以谁为准 执行会调
+         */
+
+         let p1 = new Promise((resolve,reject)=> {
+             var img = new Image()
+             img.src= "https://img.purch.com/o/aHR0cDovL3d3dy5sYXB0b3BtYWcuY29tL2ltYWdlcy93cC9wdXJjaC1hcGkvaW5jb250ZW50LzIwMTcvMDgvaW1hZ2VfMzE1NTIzMTUwMTc2NDU3NS5wbmc="
+             img.onload = function() {
+                 resolve("success")
+             }
+             img.onerror = function() {
+                 reject("error")
+             }
+         })
+         let p2 = new Promise((resolve,reject) => {
+             setTimeout(() => {
+                 resolve("timeout")
+             }, 8000);
+         })
+
+         let p = Promise.race([p1,p2])
+         p.then((data) => {
+             console.log('====================================');
+             console.log(data);
+             console.log('====================================');
+         })
+    </script>
+</body>
+</html>
