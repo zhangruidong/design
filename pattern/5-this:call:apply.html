@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        /* const MyClass = function() {
+            this.name = 'zzz'
+        }  
+        
+        // 丢失的this
+        const obj = {
+            name: 'zrd',
+            getName() {
+                console.log(this.name)
+            }
+        }
+
+        obj.getName()
+        const ev = obj.getName
+        ev() */
+
+        /* function getId(id) {
+            return document.getElementById(id)
+        } */
+        const getId = document.getElementById
+
+        // const box = document.getElementById("box")
+        const box = getId.call(document,"box")
+        console.log(box)
+
+        /* 
+        call/apply 区别
+            apply接受两个参数，第一个参数指定了函数体内this对象的指向，第二个参数为一个带下标的集合，这个集合可以为数组，
+            也可以为类数组，apply方法把这个集合中的元素作为参数传递给被调用的函数：
+
+            call传入的参数数量不固定，跟apply相同的是，第一个参数也是代表函数体内的this指向，从第二个参数开始往后，每
+            个参数被依次传入函数：
+        */
+
+       console.log(Math.max.apply(null,[1,2,3,4]))
+       console.log(Math.max(...[1,2,3,4,9]))
+
+
+       /* 
+       手动实现bind
+       */
+        Function.prototype.bind = function() {
+            const self = this
+            const context = [].shift.apply(arguments)
+            const args = [].slice.call(arguments)
+            console.log(arguments)
+            return function() {
+               console.log(arguments)
+                self.apply(context,[].concat.apply(args,[].slice.call(arguments)))
+            }
+        }
+
+        var obj = {
+            name: 'sven'
+        };
+
+        var func = function( a, b, c, d ){
+            alert ( this.name );        // 输出：sven
+            alert ( [ a, b, c, d ] )    // 输出：[ 1, 2, 3, 4 ]
+        }.bind( obj, 1, 2 );
+
+        func( 3, 4 );
+
+
+        const a = {}
+        Array.prototype.push.call(a,11)
+        console.log(a[0])  // 11
+
+    </script>
+</body>
+</html>

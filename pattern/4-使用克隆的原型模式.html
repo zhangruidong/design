@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const Plane = function() {
+            this.flood = 100;
+            this.attackLevel =1;
+            this.defenceLevel = 1;
+        };
+        const plane = new Plane();
+        plane.flood = 700;
+        plane.attackLevel = 10;
+        plane.defenceLevel = 7;
+
+        // 在不支持Object.create方法的浏览器中，则可以使用以下代码：
+        Object.create = Object.create || function (obj) {
+            const F = function() {};
+            F.prototype = obj;
+            return new F()
+        }
+
+        const clonePlane = Object.create(plane)
+
+        console.log(plane.flood)
+
+        /* 
+        原型编程范型至少包括以下基本规则：
+            所有的数据都是对象。
+
+            要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它。
+
+            对象会记住它的原型。
+
+            如果对象无法响应某个请求，它会把这个请求委托给它自己的原型。
+        */
+
+        var obj1 = new Object();
+        var obj2 = {};
+
+        console.log(obj1)
+
+        console.log(Object.getPrototypeOf(obj1))
+        console.log(Object.prototype)
+
+
+        /* 
+        设计模式在很多时候其实都体现了语言的不足之处。Peter Norvig曾说，设计模式是对语言不足的补充，如果要使用设计模式，
+        不如去找一门更好的语言。这句话非常正确。不过，作为Web前端开发者，相信JavaScript在未来很长一段时间内都是唯一的
+        选择。虽然我们没有办法换一门语言，但语言本身也在发展，说不定哪天某个模式在JavaScript中就已经是天然的存在，不再
+        需要拐弯抹角来实现。比如Object.create就是原型模式的天然实现。使用Object.create来完成原型继承看起来更能体现
+        原型模式的精髓。目前大多数主流浏览器都提供了Object.create方法。
+        
+        */
+
+        
+    
+    </script>
+</body>
+</html>
