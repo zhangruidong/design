@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    函数节流
+        使用场景
+            函数被频繁调用的场景
+                window.onresize
+                mousemove
+                上传进度
+    */    
+
+    const throttle = function(fn,intervel) {
+        const __self = fn;
+        let first = true;
+        let timer = null;
+        return function() {
+            const __me = this;
+            const args = arguments;
+            if(first) {
+                __self.apply(__me,args);
+                first = false;
+            }
+            if(timer) {
+                return false;
+            } else {
+                timer = setTimeout(function() {
+                    console.log(__me)
+                    __self.apply(__me,args);
+                    timer = null;
+                    clearTimeout(timer);
+                }, intervel || 500)
+            }
+        }
+    }
+
+    window.onresize = throttle(function() {
+        console.log(Date.now())
+    },200)
+    </script>
+</body>
+</html>
