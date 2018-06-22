@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+        分时函数
+            将短时间必须做的事情，延长时间去做
+            如： 1秒创建1000个节点会导致浏览器假死或者卡顿，延迟到1秒创建80个节点
+        */
+
+        /* const arr = [];
+        let a = 0;
+        while(a<1000){
+            a = arr.push(a+1)
+        }
+        function renderDom() {
+            arr.forEach((item) => {
+                let dom = document.createElement('div');
+                dom.innerHTML = item;
+                document.body.appendChild(dom);
+            })
+        }
+        renderDom()
+        setTimeout(() => {
+            console.log(document.querySelectorAll("div"))
+        }, 2000); */
+
+        /* 
+        惰性加载函数
+            时浏览器不进行多余的操作
+                函数没用过的时候不掉用判断
+                函数判断一次后，再次调用不用去重复判断
+        */
+       let addEvent = function(elem, type, handler) {
+            if ( window.addEventListener ){
+                addEvent = function( elem, type, handler ){
+                    elem.addEventListener( type, handler, false );
+                }
+            }else if ( window.attachEvent ){
+                addEvent = function( elem, type, handler ){
+                    elem.attachEvent( 'on' + type, handler );
+                }
+            }
+            addEvent(elem, type, handler)  // 第一次调用这个函数， 之后不会走到这里
+       }
+
+
+       /* 
+       此时addEvent依然被声明为一个普通函数，在函数里依然有一些分支判断。
+       但是在第一次进入条件分支之后， *****在函数内部会重写这个函数*****，重写之后的函数就是我们期望的addEvent函数，
+       在下一次进入addEvent函数的时候，addEvent函数里不再存在条件分支语句：
+       
+       */
+
+    </script>
+</body>
+</html>
