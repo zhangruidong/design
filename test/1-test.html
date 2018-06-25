@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let arr = []
+    let index = -1
+
+    function createDom (num) {
+      let div
+      let first
+      for (let i = index+1, len = num+index; i < len; i++) {
+        arr.push(i+1)
+        div = document.createElement('div')
+        div.innerHTML = i + 1
+        first = document.body.firstElementChild
+        document.body.insertBefore(div, first)
+      } 
+      index = index + num   
+    }
+
+    createDom(60)
+    setTimeout(() => {
+      createDom(40)
+    }, 3000);
+  </script>
+</body>
+</html>
